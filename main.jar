@@ -1,0 +1,46 @@
+public class Logger {
+    private static Logger instance;
+    private String log;
+
+    private Logger() {
+        // Construtor privado para evitar a criação de instâncias diretas
+        log = "";
+    }
+
+    public static Logger getInstance() {
+        if (instance == null) {
+            instance = new Logger();
+        }
+        return instance;
+    }
+
+    public void logEvent(String message) {
+        log += message + "\n";
+    }
+
+    public void printLog() {
+        System.out.println("Log:");
+        System.out.println(log);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Obtenha uma instância do Logger
+        Logger logger = Logger.getInstance();
+
+        // Adicione alguns eventos ao log
+        logger.logEvent("Evento 1");
+        logger.logEvent("Evento 2");
+
+        // Imprima o log
+        logger.printLog();
+
+        // Obtenha outra instância (a mesma) e adicione mais eventos
+        Logger anotherLogger = Logger.getInstance();
+        anotherLogger.logEvent("Evento 3");
+
+        // Imprima o log novamente (os eventos 3 devem estar lá)
+        anotherLogger.printLog();
+    }
+}
